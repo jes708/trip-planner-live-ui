@@ -6,7 +6,6 @@ $(document).ready(function(){
 
 
 
-
   function fillDropdowns(){
     hotels.forEach(function(hotel){
     $('#hotel-choices').append($('<option></option>').attr('value', hotel.name).text(hotel.name));
@@ -30,6 +29,7 @@ $(document).ready(function(){
 
       $div.append($span, $button);
       $('#hotel-list').append($div);
+
     } else {
       $('#hotel-list span').html($('#hotel-choices').val());
     }
@@ -64,6 +64,42 @@ $(document).ready(function(){
   $('#activity-list').on('click', '.remove', function() {
     $(this).parent().remove();
   });
+
+  $('.day-buttons').on('click', '.day-btn', function(){
+    if(this.id !== 'day-add'){
+      $('.current-day').removeClass('current-day');
+      $(this).addClass('current-day');
+      $('#day-title span').html("Day " + $(this).text());
+    }
+  })
+
+  $('#day-add').on('click', function(){
+    $('.current-day').removeClass('current-day');
+    var val = Number($(this).prev().text()) + 1; 
+    $('#day-title span').html("Day " + val);
+    $('<button class="btn btn-circle day-btn current-day">' + val + '</button>').insertBefore($(this));
+  })
+
+  $('#day-title .remove').on('click', function(){
+    var valToRemove = $(this).prev().text().match(/\d+/)[0];
+    $('.current-day').remove(); 
+    // $('.current-day').prev().addClass('current-day');
+    // remove();
+    resetNumbers();
+  })
+
+  function resetNumbers(){
+    var count = 0;
+    $.each($('.day-btn'), function(key, value){
+      if(this.id !== 'day-add'){
+        $(this).html(key + 1);
+        count++; 
+      }
+    });
+    $('.day-btn').last().prev().addClass('current-day');
+     $('#day-title span').html("Day " + count);
+  }
+
 
 
 })
