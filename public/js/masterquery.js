@@ -23,18 +23,20 @@ $(document).ready(function(){
 
 //adds to list
   $('#hotel-button').on('click', function(){
+      //console.log($('#hotel-choices').index());
     if(hotelArr[day - 1].length === 0){
       var $div = $('<div class="itinerary-item"></div>');
       var $span = $('<span>' + $('#hotel-choices').val() + '</span>');
       var $button = $('<button class="btn btn-xs btn-danger remove btn-circle">x</button>');
 
+
       $div.append($span, $button)
       //.addClass('' + day);
 
       addHotel($div);
-      var thisHotel = $('#hotel-choices').val()
-      drawMarker('hotel', places[thisHotel.place]);
-      console.log(hotelArr);
+      
+      var thisHotel = hotels[document.getElementById('hotel-choices').selectedIndex];
+      drawMarker('hotel', thisHotel.place.location);
     } else {
       $('#hotel-list span').html($('#hotel-choices').val());
       //hotelArr[day - 1] = [$('#hotel-choices').val()];
