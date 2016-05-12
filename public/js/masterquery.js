@@ -23,7 +23,6 @@ $(document).ready(function(){
 
 //adds to list
   $('#hotel-button').on('click', function(){
-   // if (!$('#hotel-list').children().length) { 
     if(hotelArr[day - 1].length === 0){
       var $div = $('<div class="itinerary-item"></div>');
       var $span = $('<span>' + $('#hotel-choices').val() + '</span>');
@@ -33,6 +32,8 @@ $(document).ready(function(){
       //.addClass('' + day);
 
       addHotel($div);
+      var thisHotel = $('#hotel-choices').val()
+      drawMarker('hotel', places[thisHotel.place]);
       console.log(hotelArr);
     } else {
       $('#hotel-list span').html($('#hotel-choices').val());
@@ -73,13 +74,6 @@ $(document).ready(function(){
 
 //Changes current-day
   $('.day-buttons').on('click', '.day-btn', function(){
-
-    // if(this.id !== 'day-add'){
-    //   $('.current-day').removeClass('current-day');
-    //   $(this).addClass('current-day');
-    //   $('#day-title span').html("Day " + $(this).text());
-    // }
-
     if(this.id !== 'day-add'){
       $('.current-day').removeClass('current-day');
       $(this).addClass('current-day');
